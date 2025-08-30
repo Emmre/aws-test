@@ -4,7 +4,7 @@ import {getTodos, addTodo, updateTodo, deleteTodo} from '../../services/todoServ
 import {Todo} from '../../types';
 import {useAuth} from '../auth/AuthContext';
 import {useRouter} from 'next/navigation';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 function EditTodoModal({todo, open, onClose, onSave, loading}: {
     todo: Todo | null;
@@ -109,7 +109,7 @@ export default function TodosPage() {
             setTodos(data);
         } catch (err: any) {
             setError('Failed to fetch todos');
-            toast.error('Failed to fetch todos', { theme: 'colored' });
+            toast.error('Failed to fetch todos', {theme: 'colored'});
         } finally {
             setLoading(false);
         }
@@ -127,11 +127,11 @@ export default function TodosPage() {
             await addTodo(formData, token!);
             setText('');
             setFile(null);
-            toast.success('Todo added successfully!', { theme: 'colored' });
+            toast.success('Todo added successfully!', {theme: 'colored'});
             fetchTodos();
         } catch (err: any) {
             setError('Failed to add todo');
-            toast.error('Failed to add todo', { theme: 'colored' });
+            toast.error('Failed to add todo', {theme: 'colored'});
         } finally {
             setLoading(false);
         }
@@ -146,7 +146,7 @@ export default function TodosPage() {
         if (!editTodo || !editTodo.id) {
             setError('Güncellenecek görev bulunamadı. Lütfen tekrar deneyin.');
             setEditTodo(null);
-            toast.error('No todo found to update.', { theme: 'colored' });
+            toast.error('No todo found to update.', {theme: 'colored'});
             return;
         }
         setLoading(true);
@@ -157,11 +157,11 @@ export default function TodosPage() {
             if (file) formData.append('image', file);
             await updateTodo(editTodo.id, formData, token!);
             setEditTodo(null);
-            toast.success('Todo updated successfully!', { theme: 'colored' });
+            toast.success('Todo updated successfully!', {theme: 'colored'});
             fetchTodos();
         } catch (err: any) {
             setError('Failed to update todo');
-            toast.error('Failed to update todo', { theme: 'colored' });
+            toast.error('Failed to update todo', {theme: 'colored'});
         } finally {
             setLoading(false);
         }
@@ -172,11 +172,11 @@ export default function TodosPage() {
         setError('');
         try {
             await deleteTodo(id, token!);
-            toast.success('Todo deleted successfully!', { theme: 'colored' });
+            toast.success('Todo deleted successfully!', {theme: 'colored'});
             fetchTodos();
         } catch (err: any) {
             setError('Failed to delete todo');
-            toast.error('Failed to delete todo', { theme: 'colored' });
+            toast.error('Failed to delete todo', {theme: 'colored'});
         } finally {
             setLoading(false);
         }
