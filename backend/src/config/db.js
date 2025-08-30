@@ -5,6 +5,11 @@ dotenv.config();
 
 const pool = new Pool({
     connectionString: process.env.PG_URI,
+    options: '-c search_path=public',
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
+
 
 export default pool;

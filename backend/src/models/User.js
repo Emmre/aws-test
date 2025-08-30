@@ -2,21 +2,21 @@
 import pool from '../config/db.js';
 
 export async function findUserByEmail(email) {
-  const res = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-  return res.rows[0];
+    const res = await pool.query('SELECT * FROM public.users WHERE email = $1', [email]);
+    return res.rows[0];
 }
 
-export async function createUser({ name, email, password }) {
-  const res = await pool.query(
-    'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-    [name, email, password]
-  );
-  return res.rows[0];
+export async function createUser({name, email, password}) {
+    const res = await pool.query(
+        'INSERT INTO public.users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
+        [name, email, password]
+    );
+    return res.rows[0];
 }
 
 export async function findUserById(id) {
-  const res = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-  return res.rows[0];
+    const res = await pool.query('SELECT * FROM public.users WHERE id = $1', [id]);
+    return res.rows[0];
 }
 
 // SQL for table creation (run this in your DB):
